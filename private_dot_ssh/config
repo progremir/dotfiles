@@ -1,0 +1,9 @@
+Host dev2
+  Hostname dev2.b12.io
+  User emir
+  ForwardAgent yes
+
+Host dev1
+  Hostname dev1.b12.io
+  User emir
+  ForwardAgent yes

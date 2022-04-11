@@ -1,0 +1,146 @@
+[user]
+	name = Emir Amanbekov
+	email = amanbekoff@gmail.com
+
+[alias]
+	c = commit -am
+	fpush = push --force
+	s = status
+	sclone = clone --depth=1
+	amend = commit --amend --all --no-edit
+	undocommit = reset HEAD~
+	hreset = reset --hard
+	co = checkout
+	df = diff --color --color-words --abbrev
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	cherrypick = cherry-pick
+	cherry = cherry-pick
+	cp = cherry-pick
+	diffbranch = !"git diff $(git merge-base HEAD origin/master)"
+
+	# show commit log of unique commits of this branch (not on master)
+	diffcommitsfrommaster = log --no-merges master..
+	# show unified diff of unique commits of this branch (and working tree)
+	difffrommaster = diff master:
+	# ^^^^ diff master... (with THREE dots) is similar, but doesn't include working tree
+	#     ^^^^ also, two dots vs three dots, so important. https://stackoverflow.com/a/48681527
+
+	# What's the ancestor commit this branch shares with master?
+	diffbase = merge-base HEAD origin/master
+
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	reup = rebase-update # depot_tools specific
+	git = !exec git
+
+[branch]
+
+	# Show most recently changed branches first.
+	sort = -committerdate
+
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+	precomposeUnicode = true
+	# https://github.com/dandavison/delta
+	pager = delta
+
+[delta]
+	max-line-length = 700
+	# max-line-distance = 0.3 # better word-diff?
+	syntax-theme = base16
+	hyperlinks = true # i filed https://github.com/dandavison/delta/issues/362 but in 2022 i can't see brokenness in the issue nor repro weirdness. but i installed latest `less` anyway
+	# navigate = true # eh. not great with short diffs.
+
+	file-style = bold yellow ul
+	file-decoration-style = yellow ol ul
+	hunk-header-decoration-style = blue
+	hunk-header-line-number-style = purple bold
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+[diff]
+	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+	# https://blog.github.com/2018-04-05-git-217-released/
+	colorMoved = default
+
+# so much color
+[color]
+	ui = auto
+[color "diff"]  # i still love these choices in 2022.
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+	newMoved = cyan dim
+	oldMoved = blue dim
+	newMovedAlternative = cyan italic
+	oldMovedAlternative = blue italic
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[color "diff-highlight"]  # mostly dead. only needed when using diff-so-fancy
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+
+# git mergetool
+[merge]
+	tool = opendiff
+	renameLimit = 0
+
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+
+# correct typos
+[help]
+	autocorrect = 1
+
+# push easily. http://stackoverflow.com/a/23918418/89484
+[push]
+	default = current
+	followTags = true
+[pull]
+	ff = only
+	default = current
+[checkout]
+	defaultRemote = origin
+
+# use separate file for username / github token / etc
+[include]
+	path = ~/.gitconfig.local
+
+[init]
+	defaultBranch = main
+#	templatedir = ~/.git_template
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[fetch]
+	prune = true
+
+[stash]
+	showPatch = true
+[log]
+	date = relative
+[protocol]
+	version = 2
