@@ -47,11 +47,14 @@
 	pager = delta
 
 [delta]
+	side-by-side = true
+	line-numbers = true
+	theme = Dracula
 	max-line-length = 700
-	# max-line-distance = 0.3 # better word-diff?
+	max-line-distance = 0.3 # better word-diff?
 	syntax-theme = base16
 	hyperlinks = true # i filed https://github.com/dandavison/delta/issues/362 but in 2022 i can't see brokenness in the issue nor repro weirdness. but i installed latest `less` anyway
-	# navigate = true # eh. not great with short diffs.
+	navigate = true # eh. not great with short diffs.
 
 	file-style = bold yellow ul
 	file-decoration-style = yellow ol ul
@@ -102,8 +105,8 @@
 	renameLimit = 0
 
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+#[url "git@github.com:"]
+	#insteadOf = https://github.com/
 
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"

@@ -7,3 +7,8 @@ Host dev1
   Hostname dev1.b12.io
   User emir
   ForwardAgent yes
+
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_ed25519
